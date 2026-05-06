@@ -6,109 +6,430 @@
   <title>Immobilien Yacoub</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #ffffff;
-      color: #111;
+      color: #10131a;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at top left, rgba(70, 95, 140, 0.22), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(20, 30, 55, 0.28), transparent 36%),
+        linear-gradient(180deg, #dfe6ee 0%, #bfc9d7 45%, #eef2f6 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.20) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.20) 1px, transparent 1px);
+      background-size: 42px 42px;
+      opacity: 0.25;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    .kontakt-box {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      background: rgba(245, 248, 252, 0.9);
+      color: #111827;
+      padding: 13px 17px;
+      border-radius: 16px;
+      box-shadow: 0 10px 28px rgba(10, 20, 35, 0.28);
+      z-index: 1000;
+      text-align: left;
+      font-size: 14px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(20, 35, 60, 0.14);
+    }
+
+    .kontakt-box p {
+      margin: 5px 0;
+    }
+
+    .copy-text {
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+      color: #1f3b63;
+    }
+
+    .copy-text:hover {
+      text-decoration: underline;
+    }
+
+    .copied {
+      color: #2563eb;
     }
 
     header {
-      background: #000;
       text-align: center;
-      padding: 40px 20px;
+      padding: 82px 20px 70px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, #030712, #111827 45%, #1e3a5f);
+      border-bottom: 5px solid rgba(74, 126, 190, 0.65);
+      box-shadow: 0 16px 35px rgba(10, 20, 35, 0.35);
+    }
+
+    .ps-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(42px);
+      opacity: 0.65;
+      animation: moveOrb 9s ease-in-out infinite alternate;
+    }
+
+    .orb1 {
+      width: 360px;
+      height: 360px;
+      background: rgba(58, 124, 255, 0.55);
+      top: -130px;
+      left: -90px;
+      animation-duration: 10s;
+    }
+
+    .orb2 {
+      width: 320px;
+      height: 320px;
+      background: rgba(100, 255, 218, 0.35);
+      right: -80px;
+      top: 30px;
+      animation-duration: 12s;
+      animation-delay: 1s;
+    }
+
+    .orb3 {
+      width: 260px;
+      height: 260px;
+      background: rgba(160, 120, 255, 0.38);
+      left: 45%;
+      bottom: -110px;
+      animation-duration: 11s;
+      animation-delay: 2s;
+    }
+
+    .wave {
+      position: absolute;
+      width: 140%;
+      height: 180px;
+      left: -20%;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.11);
+      animation: waveMove 7s ease-in-out infinite alternate;
+    }
+
+    .wave1 {
+      top: 40px;
+    }
+
+    .wave2 {
+      top: 105px;
+      animation-delay: 1.5s;
+      opacity: 0.55;
+    }
+
+    .wave3 {
+      top: 170px;
+      animation-delay: 3s;
+      opacity: 0.35;
     }
 
     .logo {
-      max-width: 420px;
+      max-width: 430px;
       width: 85%;
       height: auto;
+      position: relative;
+      z-index: 2;
+      filter: drop-shadow(0 14px 24px rgba(0,0,0,0.5));
+      animation: fadeDown 0.75s ease forwards, logoFloat 5s ease-in-out infinite;
     }
 
     main {
-      padding: 50px 20px;
+      padding: 62px 20px 85px;
       text-align: center;
     }
 
+    .title-card {
+      display: inline-block;
+      background: rgba(245, 248, 252, 0.75);
+      border: 1px solid rgba(25, 45, 75, 0.14);
+      padding: 18px 34px 20px;
+      border-radius: 22px;
+      box-shadow: 0 10px 28px rgba(20, 35, 55, 0.15);
+      margin-bottom: 45px;
+      backdrop-filter: blur(8px);
+    }
+
     h1 {
-      font-size: 36px;
-      text-decoration: underline;
-      margin-bottom: 40px;
+      font-size: 40px;
+      margin: 0;
+      position: relative;
+      letter-spacing: 0.3px;
+    }
+
+    h1::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -10px;
+      width: 82%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #2f66b3, transparent);
+      transform: translateX(-50%);
+      border-radius: 999px;
     }
 
     .angebote {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 25px;
+      gap: 30px;
       max-width: 1200px;
       margin: 0 auto;
     }
 
     .karte {
-      background: #f7f7f7;
-      border-radius: 14px;
+      background: rgba(248, 250, 252, 0.94);
+      border-radius: 22px;
       overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      box-shadow: 0 12px 30px rgba(20, 35, 55, 0.20);
       text-align: left;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      border: 1px solid rgba(20, 35, 60, 0.13);
+      animation: popIn 0.6s ease forwards;
+    }
+
+    .karte:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 18px 42px rgba(10, 25, 45, 0.30);
+      border-color: rgba(47, 102, 179, 0.38);
+    }
+
+    .bild-wrap {
+      position: relative;
+      overflow: hidden;
+      background: #111827;
     }
 
     .karte img {
       width: 100%;
-      height: 220px;
+      height: 235px;
       object-fit: cover;
       display: block;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+
+    .karte:hover img {
+      transform: scale(1.055);
+      opacity: 0.95;
     }
 
     .text {
-      padding: 18px;
+      padding: 22px;
     }
 
     .text h2 {
       margin: 0 0 10px;
-      font-size: 22px;
+      font-size: 23px;
+      color: #111827;
     }
 
     .text p {
-      margin: 6px 0;
+      margin: 7px 0;
       font-size: 16px;
-      line-height: 1.4;
+      line-height: 1.45;
+      color: #374151;
     }
 
     .preis {
+      display: inline-block;
       font-weight: bold;
-      font-size: 18px;
-      margin-top: 12px;
+      font-size: 19px !important;
+      margin-top: 16px !important;
+      color: #fff !important;
+      background: linear-gradient(135deg, #1e3a5f, #2f66b3);
+      padding: 8px 13px;
+      border-radius: 999px;
+    }
+
+    footer {
+      background: linear-gradient(135deg, #030712, #111827);
+      color: #bcd3f2;
+      text-align: center;
+      padding: 25px 15px;
+      font-size: 14px;
+      border-top: 1px solid rgba(188, 211, 242, 0.18);
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes logoFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-5px);
+      }
+    }
+
+    @keyframes moveOrb {
+      from {
+        transform: translate(0, 0) scale(1);
+      }
+      to {
+        transform: translate(45px, 28px) scale(1.12);
+      }
+    }
+
+    @keyframes waveMove {
+      from {
+        transform: translateX(-30px) rotate(-2deg);
+      }
+      to {
+        transform: translateX(40px) rotate(2deg);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .kontakt-box {
+        position: static;
+        border-radius: 0;
+        box-shadow: none;
+        text-align: center;
+      }
+
+      header {
+        padding: 48px 15px 42px;
+      }
+
+      main {
+        padding: 42px 14px 65px;
+      }
+
+      .title-card {
+        padding: 16px 25px 18px;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
     }
   </style>
 </head>
 <body>
 
+  <div class="kontakt-box">
+    <p>
+      <strong>Email:</strong>
+      <span class="copy-text" onclick="copyText(this, 'yacoub.immobilien@gmail.com')">
+        yacoub.immobilien@gmail.com
+      </span>
+    </p>
+
+    <p>
+      <strong>Telefon:</strong>
+      <span class="copy-text" onclick="copyText(this, '+49 176 32468091')">
+        +49 176 32468091
+      </span>
+    </p>
+  </div>
+
   <header>
+    <div class="ps-bg">
+      <div class="orb orb1"></div>
+      <div class="orb orb2"></div>
+      <div class="orb orb3"></div>
+      <div class="wave wave1"></div>
+      <div class="wave wave2"></div>
+      <div class="wave wave3"></div>
+    </div>
+
     <img src="logo.png" alt="Immobilien Yacoub Logo" class="logo">
   </header>
 
   <main>
-    <h1>Mietangebote</h1>
+    <div class="title-card">
+      <h1>Mietangebote</h1>
+    </div>
 
     <div class="angebote" id="angebote"></div>
   </main>
 
+  <footer>
+    © Immobilien Yacoub
+  </footer>
+
   <script src="angebote.js"></script>
 
   <script>
+    function copyText(element, text) {
+      navigator.clipboard.writeText(text);
+
+      const oldText = element.textContent;
+      element.textContent = "Kopiert!";
+      element.classList.add("copied");
+
+      setTimeout(() => {
+        element.textContent = oldText;
+        element.classList.remove("copied");
+      }, 1200);
+    }
+
     const bereich = document.getElementById("angebote");
 
-    angebote.forEach(angebot => {
+    angebote.forEach((angebot, index) => {
       bereich.innerHTML += `
-        <div class="karte">
-          <img src="${angebot.bild}" alt="${angebot.titel}">
+        <a class="karte" href="${angebot.link}" target="_blank" style="animation-delay: ${index * 0.08}s">
+          <div class="bild-wrap">
+            <img src="${angebot.bild}" alt="${angebot.titel}">
+          </div>
           <div class="text">
             <h2>${angebot.titel}</h2>
             <p><strong>Ort:</strong> ${angebot.ort}</p>
             <p>${angebot.beschreibung}</p>
             <p class="preis">${angebot.preis}</p>
           </div>
-        </div>
+        </a>
       `;
     });
   </script>
