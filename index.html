@@ -1,69 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yacoub Immobilien</title>
+  <title>Immobilien Yacoub</title>
 
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      color: #222;
+      background: #ffffff;
+      color: #111;
     }
 
     header {
-      background: #111;
-      color: white;
-      padding: 40px 20px;
+      background: #000;
       text-align: center;
+      padding: 40px 20px;
+    }
+
+    .logo {
+      max-width: 420px;
+      width: 85%;
+      height: auto;
     }
 
     main {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      padding: 50px 20px;
       text-align: center;
     }
 
     h1 {
-      margin-bottom: 10px;
+      font-size: 36px;
+      text-decoration: underline;
+      margin-bottom: 40px;
     }
 
-    button {
-      background: #111;
-      color: white;
-      border: none;
-      padding: 12px 22px;
-      border-radius: 8px;
-      cursor: pointer;
+    .angebote {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .karte {
+      background: #f7f7f7;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      text-align: left;
+    }
+
+    .karte img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .text {
+      padding: 18px;
+    }
+
+    .text h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+
+    .text p {
+      margin: 6px 0;
       font-size: 16px;
+      line-height: 1.4;
     }
 
-    button:hover {
-      background: #333;
+    .preis {
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 12px;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Yacoub Immobilien</h1>
-    <p>Test Website</p>
+    <img src="logo.png" alt="Immobilien Yacoub Logo" class="logo">
   </header>
 
   <main>
-    <h2>Welcome</h2>
-    <p>If you can see this, your GitHub Pages website works.</p>
+    <h1>Mietangebote</h1>
 
-    <button onclick="alert('Website works!')">
-      Test Button
-    </button>
+    <div class="angebote" id="angebote"></div>
   </main>
+
+  <script src="angebote.js"></script>
+
+  <script>
+    const bereich = document.getElementById("angebote");
+
+    angebote.forEach(angebot => {
+      bereich.innerHTML += `
+        <div class="karte">
+          <img src="${angebot.bild}" alt="${angebot.titel}">
+          <div class="text">
+            <h2>${angebot.titel}</h2>
+            <p><strong>Ort:</strong> ${angebot.ort}</p>
+            <p>${angebot.beschreibung}</p>
+            <p class="preis">${angebot.preis}</p>
+          </div>
+        </div>
+      `;
+    });
+  </script>
 
 </body>
 </html>
