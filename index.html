@@ -76,8 +76,7 @@
       color: white;
       position: relative;
       overflow: hidden;
-      background:
-        linear-gradient(135deg, #030712, #111827 45%, #1e3a5f);
+      background: linear-gradient(135deg, #030712, #111827 45%, #1e3a5f);
       border-bottom: 5px solid rgba(74, 126, 190, 0.65);
       box-shadow: 0 16px 35px rgba(10, 20, 35, 0.35);
     }
@@ -384,7 +383,7 @@
       <div class="wave wave3"></div>
     </div>
 
-    <img src="logo.png" alt="Immobilien Yacoub Logo" class="logo">
+    <img id="logo" alt="Immobilien Yacoub Logo" class="logo">
   </header>
 
   <main>
@@ -402,6 +401,8 @@
   <script src="angebote.js"></script>
 
   <script>
+    document.getElementById("logo").src = "logo.png?v=" + new Date().getTime();
+
     function copyText(element, text) {
       navigator.clipboard.writeText(text);
 
