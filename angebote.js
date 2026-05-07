@@ -28,7 +28,7 @@ const angebote = [
     titel: "Familienhaus",
     ort: "Bad Bentheim",
     beschreibung: "Ruhige Lage, mehrere Zimmer und schöner Außenbereich.",
-    preis: "1.100 € / Monat",
+    preis: "10 € / Monat",
     link: "https://www.kleinanzeigen.de/"
   },
   {
